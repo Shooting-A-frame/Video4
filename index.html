@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.0/dist/aframe-environment-component.min.js"></script>
+    <script src="aframe-physics-system.min.js"></script>
+    <script src="app.js"></script>
+    
+  </head>
+ 
+  <body>
+    <a-scene physics="gravity: -2">
+        <a-entity environment="preset: default"></a-entity>
+      
+      <!-- a collection a table and 3 shooting targets-->
+      <a-entity>
+        <!-- table -->
+        <a-box static-body="shape: box" position="0 0.5 -7" width="5" color="#4CC3D9"></a-box>
+         <!-- 3 targets -->
+         <a-box class="target" dynamic-body="shape: box" position="-2 1.5 -7" color="yellow"></a-box>
+         <a-box class="target" dynamic-body="shape: box" position="0 1.5 -7" color="yellow"></a-box>
+         <a-box class="target" dynamic-body="shape: box" position="2 1.5 -7" color="yellow"></a-box>
+      </a-entity>
+      
+      <a-entity id="ground" geometry="primitive: box; width: 100; depth: 100; height: 0.1" 
+        static-body="shape: box" position="0 -0.1 0"></a-entity>
+      
+      <a-entity>
+        <a-entity id="camera"  camera look-controls wasd-controls position="0 1.6 0">
+          <a-text value="count: 0" position="-1 1 -4"></a-text>
+          <a-cursor intersection-spawn="Event: click; mixin: voxel"></a-cursor>
+        </a-entity>
+        <a-entity oculus-touch-controls="hand: left" trigger-check></a-entity>
+        <a-entity id="rtcontroller" oculus-touch-controls="hand: right" trigger-check raycaster="showLine: true"></a-entity>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+  <script src="shoot.js"></script>
+</html>
